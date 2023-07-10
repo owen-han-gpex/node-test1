@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - aws s3 cp s3://$S3_LOTTO_DOTENV_BUCKET_NAME/.env.$ENV .env
+      - aws s3 cp s3://$S3_LOTTO_DOTENV_BUCKET_NAME/.env.development .env
       - cat .env
       - docker build --platform=linux/amd64 -t $IMAGE_REPO_NAME:$IMAGE_TAG -f "${DOCKER_FILE_PATH}" .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG

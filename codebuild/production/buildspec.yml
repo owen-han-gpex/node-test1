@@ -1,8 +1,6 @@
 version: 0.2
 run-as: root
 
-
-
 phases:
   pre_build:
     commands:
@@ -17,7 +15,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - aws s3 cp s3://$S3_BUCKET_NAME/.env.$ENV .env
+      - aws s3 cp s3://$S3_LOTTO_DOTENV_BUCKET_NAME/.env.production .env
       - cat .env
       - docker build --platform=linux/amd64 -t $IMAGE_REPO_NAME:$IMAGE_TAG -f "${DOCKER_FILE_PATH}" .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
@@ -27,8 +25,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo Writing image definitions file...
-      - echo CODEBUILD_BUILD_NUMBER=$CODEBUILD_BUILD_NUMBER
-      - echo CODEBUILD_BUILD_SUCCEEDING=$CODEBUILD_BUILD_SUCCEEDING
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files:
