@@ -7,6 +7,7 @@ export default function hello(req, res) {
     let body =
         {
             name: 'John Doe',
+            version: '2',
 
         };
 
