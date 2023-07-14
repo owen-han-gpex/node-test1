@@ -9,8 +9,8 @@ export default async function hello(req, res) {
     let body =
         {
             name: 'John Doe',
-            version: '7',
-            lastModified: '2023-07-14 16:55:00 kst'
+            version: '8',
+            lastModified: '2023-07-14 18:30:00 kst'
 
         };
     let dbResult = await dbTest();
@@ -21,6 +21,9 @@ export default async function hello(req, res) {
         body.payloadConfigPath = process.env.PAYLOAD_CONFIG_PATH
         body.findme = process.env.FIND_ME
         body.test = process.env.TEST
+        body.MYSQL_HOST = process.env.MYSQL_HOST
+        body.MYSQL_DATABASE = process.env.MYSQL_DATABASE
+        body.MYSQL_USER = process.env.MYSQL_USER
         body.dbResult = dbResult
     } catch (e) {
         e.status
@@ -32,7 +35,7 @@ export default async function hello(req, res) {
 export async function dbTest() {
     try {
         const result = await query({
-            query: 'select * from network',
+            query: `select 'success' as 'connection status'`,
         });
         return result;
     } catch (error) {
