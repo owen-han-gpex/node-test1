@@ -7,7 +7,8 @@ export default function hello(req, res) {
     let body =
         {
             name: 'John Doe',
-            version: '2',
+            version: '3',
+            lastModified: '2023-07-14 14:47:00 kst'
 
         };
 
