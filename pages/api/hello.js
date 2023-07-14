@@ -2,15 +2,15 @@
 
 // import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
-import {query} from "../lib/db";
+import {query} from "../../lib/db";
 
 export default async function hello(req, res) {
 
     let body =
         {
             name: 'John Doe',
-            version: '5',
-            lastModified: '2023-07-14 16:17:00 kst'
+            version: '6',
+            lastModified: '2023-07-14 16:36:00 kst'
 
         };
     let dbResult = await dbTest();
