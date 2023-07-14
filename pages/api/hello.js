@@ -2,15 +2,18 @@
 
 // import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
-export default function hello(req, res) {
+import {query} from "../lib/db";
+
+export default async function hello(req, res) {
 
     let body =
         {
             name: 'John Doe',
-            version: '3',
+            version: '4',
             lastModified: '2023-07-14 14:47:00 kst'
 
         };
+    let dbResult = await dbTest();
 
     body.node_env = process.env.NODE_ENV
     try {
@@ -18,8 +21,21 @@ export default function hello(req, res) {
         body.payloadConfigPath = process.env.PAYLOAD_CONFIG_PATH
         body.findme = process.env.FIND_ME
         body.test = process.env.TEST
+        body.dbResult = dbResult
     } catch (e) {
-        console.log(e)
+        e.status
     }
     res.status(200).json(body)
+}
+
+
+export async function dbTest() {
+    try {
+        const result = await query({
+            query: 'select * from network',
+        });
+        return result;
+    } catch (error) {
+        error.status
+    }
 }
