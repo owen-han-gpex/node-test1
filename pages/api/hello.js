@@ -9,8 +9,8 @@ export default async function hello(req, res) {
     let body =
         {
             name: 'John Doe',
-            version: '10',
-            lastModified: '2023-07-14 19:00:00 kst'
+            version: '11',
+            lastModified: '2023-07-17 10:36:00 kst'
 
         };
     let dbResult = await dbTest();
